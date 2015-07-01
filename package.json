@@ -1,0 +1,40 @@
+{
+  "name": "dmp",
+  "description": "Diff Match Patch",
+  "homepage": "https://github.com/Floobits/dmp",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:Floobits/dmp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Floobits/dmp/issues"
+  },
+  "contributors": [
+    "Matt Kaniaris <mkaniaris@gmail.com>",
+    "Geoff Greer <geoff@greer.fm>"
+  ],
+  "version": "0.0.1",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "0.x"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "main": "lib/diff_match_patch_test.js",
+  "directories": {
+    "lib": "./lib"
+  },
+  "scripts": {
+    "test": "NODE_PATH=lib:tests node ./tests/test.js",
+    "install": "",
+    "lint": "./node_modules/eslint/bin/eslint.js lib/*.js tests/*.js"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "https://github.com/Floobits/dmp/blob/master/LICENSE"
+    }
+  ]
+}
