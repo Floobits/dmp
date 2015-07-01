@@ -1,5 +1,7 @@
 # DMP: Diff Match Patch
 
+## Development status: Not yet working. Check back soon!
+
 Node.js/io.js module based on Neil Fraiser's excellent [Diff Match Patch](https://code.google.com/p/google-diff-match-patch/).
 
 [![npm version](https://badge.fury.io/js/dmp.svg)](http://badge.fury.io/js/dmp)
