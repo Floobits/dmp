@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Test Harness for Diff Match and Patch
  *
@@ -17,6 +19,54 @@
  * limitations under the License.
  */
 
+var DMP = require("../lib/diff_match_patch");
+var diff_match_patch = DMP.diff_match_patch;
+var DIFF_DELETE = DMP.DIFF_DELETE;
+var DIFF_INSERT = DMP.DIFF_INSERT;
+var DIFF_EQUAL = DMP.DIFF_EQUAL;
+
+// Counters for unit test results.
+var test_good = 0;
+var test_bad = 0;
+
+// If expected and actual are the identical, print 'Ok', otherwise 'Fail!'
+function assertEquals(msg, expected, actual) {
+  if (typeof actual == 'undefined') {
+    // msg is optional.
+    actual = expected;
+    expected = msg;
+    msg = 'Expected: \'' + expected + '\' Actual: \'' + actual + '\'';
+  }
+  if (expected === actual) {
+    console.log('<FONT COLOR="#009900">Ok</FONT><BR>');
+    test_good++;
+  } else {
+    console.log('<FONT COLOR="#990000"><BIG>Fail!</BIG></FONT><BR>');
+    msg = msg.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    console.log('<code>' + msg + '</code><BR>');
+    test_bad++;
+  }
+}
+
+function assertTrue(msg, actual) {
+  if (typeof actual == 'undefined') {
+    // msg is optional.
+    actual = msg;
+    assertEquals(true, actual);
+  } else {
+    assertEquals(msg, true, actual);
+  }
+}
+
+function assertFalse(msg, actual) {
+  if (typeof actual == 'undefined') {
+    // msg is optional.
+    actual = msg;
+    assertEquals(false, actual);
+  } else {
+    assertEquals(msg, false, actual);
+  }
+}
 
 // If expected and actual are the equivalent, pass the test.
 function assertEquivalent(msg, expected, actual) {
@@ -936,3 +986,53 @@ function testPatchApply() {
   results = dmp.patch_apply(patches, 'x');
   assertEquivalent(['x123', [true]], results);
 }
+
+var tests = [
+  testDiffCommonPrefix,
+  testDiffCommonSuffix,
+  testDiffCommonOverlap,
+  testDiffHalfMatch,
+  testDiffLinesToChars,
+  testDiffCharsToLines,
+  testDiffCleanupMerge,
+  testDiffCleanupSemanticLossless,
+  testDiffCleanupSemantic,
+  testDiffCleanupEfficiency,
+  testDiffPrettyHtml,
+  testDiffText,
+  testDiffDelta,
+  testDiffXIndex,
+  testDiffLevenshtein,
+  testDiffBisect,
+  testDiffMain,
+
+  testMatchAlphabet,
+  testMatchBitap,
+  testMatchMain,
+
+  testPatchObj,
+  testPatchFromText,
+  testPatchToText,
+  testPatchAddContext,
+  testPatchMake,
+  testPatchSplitMax,
+  testPatchAddPadding,
+  testPatchApply
+];
+
+function runTests() {
+  for (var x = 0; x < tests.length; x++) {
+    console.log(tests[x]);
+    tests[x]();
+  }
+}
+
+console.log("If debugging errors, start with the first reported error. Subsequent tests often rely on earlier ones.");
+
+var startTime = (new Date()).getTime();
+runTests();
+var endTime = (new Date()).getTime();
+console.log("Done");
+console.log("Tests passed: " + test_good);
+console.log("Tests failed: " + test_bad);
+console.log("Total time: " + (endTime - startTime) + " ms");
