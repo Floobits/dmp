@@ -1034,3 +1034,9 @@ console.log("Done");
 console.log("Tests passed: " + test_good);
 console.log("Tests failed: " + test_bad);
 console.log("Total time: " + (endTime - startTime) + " ms");
+
+if (test_bad) {
+  /* eslint-disable no-process-exit */
+  process.exit(1);
+  /* eslint-enable no-process-exit */
+}
