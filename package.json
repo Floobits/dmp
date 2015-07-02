@@ -20,7 +20,7 @@
     "eslint": "0.x"
   },
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=2.0.0"
   },
   "main": "lib/diff_match_patch_test.js",
   "directories": {
