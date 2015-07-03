@@ -1,4 +1,6 @@
 "use strict";
+// TODO: CamelCase DMP attrs? It's the JS way, but not the DMP way
+/* eslint-disable new-cap */
 
 /**
  * Test Harness for Diff Match and Patch
@@ -57,6 +59,7 @@ function assertTrue(msg, actual) {
   }
 }
 
+/*
 function assertFalse(msg, actual) {
   if (typeof actual === "undefined") {
     // msg is optional.
@@ -66,6 +69,7 @@ function assertFalse(msg, actual) {
     assertEquals(msg, false, actual);
   }
 }
+*/
 
 // Are a and b the equivalent? -- Recursive.
 function _equivalent(a, b) {
@@ -219,16 +223,16 @@ function testDiffLinesToChars() {
   assertLinesToCharsResultEquals({chars1: "\x01", chars2: "\x02", lineArray: ["", "a", "b"]}, dmp.diff_linesToChars_("a", "b"));
 
   // More than 256 to reveal any 8-bit limitations.
-  var n = 300;
-  var lineList = [];
-  var charList = [];
-  for (var x = 1; x < n + 1; x++) {
+  const n = 300;
+  let lineList = [];
+  let charList = [];
+  for (let x = 1; x < n + 1; x++) {
     lineList[x - 1] = x + "\n";
     charList[x - 1] = String.fromCharCode(x);
   }
   assertEquals(n, lineList.length);
-  var lines = lineList.join("");
-  var chars = charList.join("");
+  const lines = lineList.join("");
+  const chars = charList.join("");
   assertEquals(n, chars.length);
   lineList.unshift("");
   assertLinesToCharsResultEquals({chars1: chars, chars2: "", lineArray: lineList}, dmp.diff_linesToChars_(lines, ""));
@@ -241,16 +245,16 @@ function testDiffCharsToLines() {
   assertEquivalent([[DIFF_EQUAL, "alpha\nbeta\nalpha\n"], [DIFF_INSERT, "beta\nalpha\nbeta\n"]], diffs);
 
   // More than 256 to reveal any 8-bit limitations.
-  var n = 300;
-  var lineList = [];
-  var charList = [];
-  for (var x = 1; x < n + 1; x++) {
+  const n = 300;
+  let lineList = [];
+  let charList = [];
+  for (let x = 1; x < n + 1; x++) {
     lineList[x - 1] = x + "\n";
     charList[x - 1] = String.fromCharCode(x);
   }
   assertEquals(n, lineList.length);
-  var lines = lineList.join("");
-  var chars = charList.join("");
+  const lines = lineList.join("");
+  const chars = charList.join("");
   assertEquals(n, chars.length);
   lineList.unshift("");
   diffs = [[DIFF_DELETE, chars]];
@@ -478,7 +482,7 @@ function testDiffDelta() {
   var text1 = dmp.diff_text1(diffs);
   assertEquals("jumps over the lazy", text1);
 
-  var delta = dmp.diff_toDelta(diffs);
+  let delta = dmp.diff_toDelta(diffs);
   assertEquals("=4\t-1\t+ed\t=6\t-3\t+a\t=5\t+old dog", delta);
 
   // Convert delta string into a diff.
@@ -521,7 +525,7 @@ function testDiffDelta() {
 
   // Verify pool of unchanged characters.
   diffs = [[DIFF_INSERT, "A-Z a-z 0-9 - _ . ! ~ * ' ( ) ; / ? : @ & = + $ , # "]];
-  var text2 = dmp.diff_text2(diffs);
+  const text2 = dmp.diff_text2(diffs);
   assertEquals("A-Z a-z 0-9 - _ . ! ~ * ' ( ) ; / ? : @ & = + $ , # ", text2);
 
   delta = dmp.diff_toDelta(diffs);
@@ -604,16 +608,16 @@ function testDiffMain() {
 
   // Timeout.
   dmp.Diff_Timeout = 0.1;  // 100ms
-  var a = "`Twas brillig, and the slithy toves\nDid gyre and gimble in the wabe:\nAll mimsy were the borogoves,\nAnd the mome raths outgrabe.\n";
-  var b = "I am the very model of a modern major general,\nI've information vegetable, animal, and mineral,\nI know the kings of England, and I quote the fights historical,\nFrom Marathon to Waterloo, in order categorical.\n";
+  let a = "`Twas brillig, and the slithy toves\nDid gyre and gimble in the wabe:\nAll mimsy were the borogoves,\nAnd the mome raths outgrabe.\n";
+  let b = "I am the very model of a modern major general,\nI've information vegetable, animal, and mineral,\nI know the kings of England, and I quote the fights historical,\nFrom Marathon to Waterloo, in order categorical.\n";
   // Increase the text lengths by 1024 times to ensure a timeout.
-  for (var x = 0; x < 10; x++) {
+  for (let x = 0; x < 10; x++) {
     a = a + a;
     b = b + b;
   }
-  var startTime = (new Date()).getTime();
+  const startTime = (new Date()).getTime();
   dmp.diff_main(a, b);
-  var endTime = (new Date()).getTime();
+  const endTime = (new Date()).getTime();
   // Test that we took at least the timeout period.
   assertTrue(dmp.Diff_Timeout * 1000 <= endTime - startTime);
   // Test that we didn't take forever (be forgiving).
@@ -641,8 +645,8 @@ function testDiffMain() {
   // Overlap line-mode.
   a = "1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n";
   b = "abcdefghij\n1234567890\n1234567890\n1234567890\nabcdefghij\n1234567890\n1234567890\n1234567890\nabcdefghij\n1234567890\n1234567890\n1234567890\nabcdefghij\n";
-  var texts_linemode = diff_rebuildtexts(dmp.diff_main(a, b, true));
-  var texts_textmode = diff_rebuildtexts(dmp.diff_main(a, b, false));
+  const texts_linemode = diff_rebuildtexts(dmp.diff_main(a, b, true));
+  const texts_textmode = diff_rebuildtexts(dmp.diff_main(a, b, false));
   assertEquivalent(texts_textmode, texts_linemode);
 
   // Test null inputs.
@@ -753,8 +757,7 @@ function testPatchObj() {
   p.length1 = 18;
   p.length2 = 17;
   p.diffs = [[DIFF_EQUAL, "jump"], [DIFF_DELETE, "s"], [DIFF_INSERT, "ed"], [DIFF_EQUAL, " over "], [DIFF_DELETE, "the"], [DIFF_INSERT, "a"], [DIFF_EQUAL, "\nlaz"]];
-  var strp = p.toString();
-  assertEquals("@@ -21,18 +22,17 @@\n jump\n-s\n+ed\n  over \n-the\n+a\n %0Alaz\n", strp);
+  assertEquals("@@ -21,18 +22,17 @@\n jump\n-s\n+ed\n  over \n-the\n+a\n %0Alaz\n", p.toString());
 }
 
 function testPatchFromText() {
@@ -791,7 +794,7 @@ function testPatchToText() {
 
 function testPatchAddContext() {
   dmp.Patch_Margin = 4;
-  var p = dmp.patch_fromText("@@ -21,4 +21,10 @@\n-jump\n+somersault\n")[0];
+  let p = dmp.patch_fromText("@@ -21,4 +21,10 @@\n-jump\n+somersault\n")[0];
   dmp.patch_addContext_(p, "The quick brown fox jumps over the lazy dog.");
   assertEquals("@@ -17,12 +17,18 @@\n fox \n-jump\n+somersault\n s ov\n", p.toString());
 
@@ -816,10 +819,10 @@ function testPatchMake() {
   var patches = dmp.patch_make("", "");
   assertEquals("", dmp.patch_toText(patches));
 
-  var text1 = "The quick brown fox jumps over the lazy dog.";
-  var text2 = "That quick brown fox jumped over a lazy dog.";
+  let text1 = "The quick brown fox jumps over the lazy dog.";
+  let text2 = "That quick brown fox jumped over a lazy dog.";
   // Text2+Text1 inputs.
-  var expectedPatch = "@@ -1,8 +1,7 @@\n Th\n-at\n+e\n  qui\n@@ -21,17 +21,18 @@\n jump\n-ed\n+s\n  over \n-a\n+the\n  laz\n";
+  let expectedPatch = "@@ -1,8 +1,7 @@\n Th\n-at\n+e\n  qui\n@@ -21,17 +21,18 @@\n jump\n-ed\n+s\n  over \n-a\n+the\n  laz\n";
   // The second patch must be "-21,17 +21,18", not "-22,17 +21,18" due to rolling context.
   patches = dmp.patch_make(text2, text1);
   assertEquals(expectedPatch, dmp.patch_toText(patches));
@@ -830,7 +833,7 @@ function testPatchMake() {
   assertEquals(expectedPatch, dmp.patch_toText(patches));
 
   // Diff input.
-  var diffs = dmp.diff_main(text1, text2, false);
+  let diffs = dmp.diff_main(text1, text2, false);
   patches = dmp.patch_make(diffs);
   assertEquals(expectedPatch, dmp.patch_toText(patches));
 
@@ -852,7 +855,7 @@ function testPatchMake() {
 
   // Long string with repeats.
   text1 = "";
-  for (var x = 0; x < 100; x++) {
+  for (let x = 0; x < 100; x++) {
     text1 += "abcdef";
   }
   text2 = text1 + "123";
@@ -876,7 +879,7 @@ function testPatchSplitMax() {
   assertEquals("@@ -1,32 +1,46 @@\n+X\n ab\n+X\n cd\n+X\n ef\n+X\n gh\n+X\n ij\n+X\n kl\n+X\n mn\n+X\n op\n+X\n qr\n+X\n st\n+X\n uv\n+X\n wx\n+X\n yz\n+X\n 012345\n@@ -25,13 +39,18 @@\n zX01\n+X\n 23\n+X\n 45\n+X\n 67\n+X\n 89\n+X\n 0\n", dmp.patch_toText(patches));
 
   patches = dmp.patch_make("abcdef1234567890123456789012345678901234567890123456789012345678901234567890uvwxyz", "abcdefuvwxyz");
-  var oldToText = dmp.patch_toText(patches);
+  const oldToText = dmp.patch_toText(patches);
   dmp.patch_splitMax(patches);
   assertEquals(oldToText, dmp.patch_toText(patches));
 
@@ -914,8 +917,8 @@ function testPatchApply() {
   dmp.Match_Threshold = 0.5;
   dmp.Patch_DeleteThreshold = 0.5;
   // Null case.
-  var patches = dmp.patch_make("", "");
-  var results = dmp.patch_apply(patches, "Hello world.");
+  let patches = dmp.patch_make("", "");
+  let results = dmp.patch_apply(patches, "Hello world.");
   assertEquivalent(["Hello world.", []], results);
 
   // Exact match.
@@ -959,7 +962,7 @@ function testPatchApply() {
 
   // No side effects.
   patches = dmp.patch_make("", "test");
-  var patchstr = dmp.patch_toText(patches);
+  let patchstr = dmp.patch_toText(patches);
   dmp.patch_apply(patches, "");
   assertEquals(patchstr, dmp.patch_toText(patches));
 
@@ -985,7 +988,7 @@ function testPatchApply() {
   assertEquivalent(["x123", [true]], results);
 }
 
-var tests = [
+const tests = [
   testDiffCommonPrefix,
   testDiffCommonSuffix,
   testDiffCommonOverlap,
@@ -1019,7 +1022,7 @@ var tests = [
 ];
 
 function runTests() {
-  for (var x = 0; x < tests.length; x++) {
+  for (let x = 0; x < tests.length; x++) {
     console.log(tests[x]);
     tests[x]();
   }
@@ -1027,9 +1030,9 @@ function runTests() {
 
 console.log("If debugging errors, start with the first reported error. Subsequent tests often rely on earlier ones.");
 
-var startTime = (new Date()).getTime();
+const startTime = (new Date()).getTime();
 runTests();
-var endTime = (new Date()).getTime();
+const endTime = (new Date()).getTime();
 console.log("Done");
 console.log("Tests passed: " + test_good);
 console.log("Tests failed: " + test_bad);
