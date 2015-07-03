@@ -1,6 +1,4 @@
 "use strict";
-// TODO: CamelCase DMP attrs? It's the JS way, but not the DMP way
-/* eslint-disable new-cap */
 
 /**
  * Test Harness for Diff Match and Patch
@@ -750,7 +748,9 @@ function testMatchMain() {
 
 function testPatchObj() {
   // Patch Object.
+  /* eslint-disable new-cap */
   var p = new DMP.patch_obj();
+  /* eslint-enable new-cap */
   p.start1 = 20;
   p.start2 = 21;
   p.length1 = 18;
