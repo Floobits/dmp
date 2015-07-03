@@ -19,7 +19,7 @@
  * limitations under the License.
  */
 
-var DMP = require("../lib/diff_match_patch");
+var DMP = require("../lib/dmp");
 var DIFF_DELETE = DMP.DIFF_DELETE;
 var DIFF_INSERT = DMP.DIFF_INSERT;
 var DIFF_EQUAL = DMP.DIFF_EQUAL;

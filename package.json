@@ -22,7 +22,7 @@
   "engines": {
     "node": ">=2.0.0"
   },
-  "main": "lib/diff_match_patch_test.js",
+  "main": "lib/dmp.js",
   "directories": {
     "lib": "./lib"
   },
