@@ -19,7 +19,7 @@ This module requires io.js v2.0 or later.
 
 ## Use
 
-```javascript
+```js
 const DMP = require("dmp");
 const dmp = new DMP();
 
@@ -43,7 +43,7 @@ console.log(result);
 After creating a DMP object, you can tweak a few attributes. Don't mess with these unless you know what you're doing!
 
 
-```javascript
+```js
 dmp.Patch_DeleteThreshold = 0.375;
 dmp.Match_Threshold = 0.375;
 dmp.Match_Distance = 100;
@@ -51,7 +51,7 @@ dmp.Match_Distance = 100;
 
 Default values are:
 
-```javascript
+```js
 Patch_DeleteThreshold = 0.5;
 Match_Threshold = 0.5;
 Match_Distance = 1000;

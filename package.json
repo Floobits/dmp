@@ -4,7 +4,7 @@
   "homepage": "https://github.com/Floobits/dmp",
   "repository": {
     "type": "git",
-    "url": "git://github.com:Floobits/dmp.git"
+    "url": "https://github.com/Floobits/dmp.git"
   },
   "bugs": {
     "url": "https://github.com/Floobits/dmp/issues"
