@@ -19,14 +19,14 @@
  * limitations under the License.
  */
 
-var DMP = require("../lib/dmp");
-var DIFF_DELETE = DMP.DIFF_DELETE;
-var DIFF_INSERT = DMP.DIFF_INSERT;
-var DIFF_EQUAL = DMP.DIFF_EQUAL;
+const DMP = require("../lib/dmp");
+const DIFF_DELETE = DMP.DIFF_DELETE;
+const DIFF_INSERT = DMP.DIFF_INSERT;
+const DIFF_EQUAL = DMP.DIFF_EQUAL;
 
 // Counters for unit test results.
-var test_good = 0;
-var test_bad = 0;
+let test_good = 0;
+let test_bad = 0;
 
 // If expected and actual are the identical, print 'Ok', otherwise 'Fail!'
 function assertEquals(msg, expected, actual) {
@@ -37,10 +37,10 @@ function assertEquals(msg, expected, actual) {
     msg = "Expected: '" + expected + "' Actual: '" + actual + "'";
   }
   if (expected === actual) {
-    console.log("Ok");
+    console.log("OK");
     test_good++;
   } else {
-    console.error("Fail!");
+    console.error("FAIL!");
     console.error(msg);
     test_bad++;
   }
@@ -1022,7 +1022,7 @@ const tests = [
 
 function runTests() {
   for (let x = 0; x < tests.length; x++) {
-    console.log(tests[x]);
+    console.log(tests[x].name);
     tests[x]();
   }
 }
@@ -1032,7 +1032,7 @@ console.log("If debugging errors, start with the first reported error. Subsequen
 const startTime = (new Date()).getTime();
 runTests();
 const endTime = (new Date()).getTime();
-console.log("Done");
+console.log("Done!");
 console.log("Tests passed: " + test_good);
 console.log("Tests failed: " + test_bad);
 console.log("Total time: " + (endTime - startTime) + " ms");
