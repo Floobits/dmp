@@ -22,7 +22,6 @@
  */
 
 var DMP = require("../lib/diff_match_patch");
-var diff_match_patch = DMP.diff_match_patch;
 var DIFF_DELETE = DMP.DIFF_DELETE;
 var DIFF_INSERT = DMP.DIFF_INSERT;
 var DIFF_EQUAL = DMP.DIFF_EQUAL;
@@ -125,7 +124,7 @@ function diff_rebuildtexts(diffs) {
   return [text1, text2];
 }
 
-const dmp = new diff_match_patch();
+const dmp = new DMP();
 
 
 // DIFF TEST FUNCTIONS
@@ -751,7 +750,7 @@ function testMatchMain() {
 
 function testPatchObj() {
   // Patch Object.
-  var p = new diff_match_patch.patch_obj();
+  var p = new DMP.patch_obj();
   p.start1 = 20;
   p.start2 = 21;
   p.length1 = 18;
