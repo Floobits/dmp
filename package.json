@@ -16,10 +16,11 @@
   "version": "0.2.0",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "0.x"
+    "eslint": "3.x",
+    "eslint-config-floobits": "*"
   },
   "engines": {
-    "node": ">=2.0.0"
+    "node": ">=4.0.0"
   },
   "main": "lib/dmp.js",
   "directories": {

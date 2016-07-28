@@ -1,8 +1,8 @@
 # DMP: Diff Match Patch
 
-## Development status: Working, almost production-ready.
+## Development status: Production-ready.
 
-Node.js/io.js module based on Neil Fraiser's excellent [Diff Match Patch](https://code.google.com/p/google-diff-match-patch/).
+Node.js module based on Neil Fraiser's excellent [Diff Match Patch](https://code.google.com/p/google-diff-match-patch/).
 
 [![npm version](https://badge.fury.io/js/dmp.svg)](http://badge.fury.io/js/dmp)
 
@@ -14,7 +14,7 @@ Node.js/io.js module based on Neil Fraiser's excellent [Diff Match Patch](https:
 
 Add `dmp` to your `package.json` or `npm install dmp`.
 
-This module requires io.js v2.0 or later.
+This module requires Node.js v4.0 or later.
 
 
 ## Use
